@@ -10,75 +10,57 @@ class HalfKite implements Triangle {
   public pointB;
   public pointC;
 
-  public pointD;
-  public pointE;
+  public pointD: Point = { x: 0, y: 0 };
+  public pointE: Point = { x: 0, y: 0 };
+  public pointF: Point = { x: 0, y: 0 };
 
-  public pointF;
-
+  public isMirror: boolean = false;
 
   constructor(pointA: Point, pointB: Point, pointC: Point) {
     this.pointA = pointA;
     this.pointB = pointB;
     this.pointC = pointC;
-    this.CalcPointD();
-    this.CalcPointE();
-    this.CalcPointF();
-  }
 
-  private CalcPointD() {
-    let vecBA_x: number = this.pointA.x - this.pointB.x;
-    let vecBA_y: number = this.pointA.y - this.pointB.y;
-
-    let normBA: number = Math.sqrt(vecBA_x ** 2 + vecBA_y ** 2);
-
-    let nvecBA_x: number = vecBA_x / normBA;
-    let nvecBA_y: number = vecBA_y / normBA;
-
-    let normCB: number = (this.pointC.x - this.pointB.x) ** 2 + (this.pointC.x - this.pointB.y) ** 2;
-    let normBD: number = 2.0 * normCB * Math.cos(rad72degree);
-    this.pointD.x = this.pointB.x + nvecBA_x * normBD;
-    this.pointD.y = this.pointB.y + nvecBA_y * normBD;
-  }
-
-  private CalcPointE() {
-    let vecAD_x: number = this.pointD.x - this.pointA.x;
-    let vecAD_y: number = this.pointD.y - this.pointA.y;
-
-    let normAD: number = Math.sqrt(vecAD_x ** 2 + vecAD_y ** 2);
-
-    let normAE: number = normAD * .5 / Math.cos(rad36degree);
-
-    let vecAC_x: number = this.pointC.x - this.pointA.x;
-    let vecAC_y: number = this.pointC.y - this.pointA.y
-
-    let normAC: number = Math.sqrt(vecAC_x ** 2 + vecAC_y ** 2);
-
-    let nvecAC_x: number = vecAC_x / normAC;
-    let nvecAC_y: number = vecAC_y / normAC;
-
-    this.pointE.x = this.pointA.x + nvecAC_x * normAE;
-    this.pointE.y = this.pointA.y + nvecAC_y * normAE;
-  }
-
-  private CalcPointF() {
+    // check is mirrored
     let vecAB_x: number = this.pointB.x - this.pointA.x;
     let vecAB_y: number = this.pointB.y - this.pointA.y;
 
     let vecAC_x: number = this.pointC.x - this.pointA.x;
     let vecAC_y: number = this.pointC.y - this.pointA.y;
 
-    let raidan;
-    if(vecAB_x * vecAC_y - vecAB_y * vecAC_x > 0) {
-      // CW
-    } else {
-      // CCW
+    this.isMirror = vecAB_x * vecAC_y - vecAB_y * vecAC_x < 0;
+
+    // CW is Positive
+    let radBCD = rad36degree;
+    let radBCE = rad72degree;
+    let radEAF = rad72degree;
+
+    if (this.isMirror) {
+      radBCD = -radBCD;
+      radBCE = -radBCE;
+      radEAF = -radEAF;
     }
+
+    let vecCB_x: number = this.pointB.x - this.pointC.x;
+    let vecCB_y: number = this.pointB.y - this.pointC.y;
+
+    this.pointD.x = pointC.x + (vecCB_x * Math.cos(radBCD) + vecCB_y * Math.sin(radBCD));
+    this.pointD.y = pointC.y + (- vecCB_x * Math.sin(radBCD) + vecCB_y * Math.cos(radBCD));
+
+    this.pointE.x = pointC.x + (vecCB_x * Math.cos(radBCE) + vecCB_y * Math.sin(radBCE));
+    this.pointE.y = pointC.y + (-vecCB_x * Math.sin(radBCE) + vecCB_y * Math.cos(radBCE));
+
+    let vecAE_x: number = this.pointE.x - this.pointA.x;
+    let vecAE_y: number = this.pointE.y - this.pointA.y;
+
+    this.pointF.x = pointA.x + (vecAE_x * Math.cos(radEAF) + vecAE_y * Math.sin(radEAF));
+    this.pointF.y = pointA.y + (-vecAE_x * Math.sin(radEAF) + vecAE_y * Math.cos(radEAF));
   }
 
-
   public YieldHalfDartList(): HalfDart[] {
-    let hd1 = new HalfDart();
-    return [hd1];
+    let hd1 = new HalfDart(this.pointA, this.pointD, this.pointE);
+    let hd2 = new HalfDart(this.pointA, this.pointD, this.pointF);
+    return [hd1, hd2];
   }
 
   public YieldHalfKiteList(): HalfKite[] {
