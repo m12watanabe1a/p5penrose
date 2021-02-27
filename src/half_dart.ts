@@ -12,6 +12,9 @@ class HalfDart implements Triangle {
 
   public isMirror: boolean = false;
 
+  private halfdart_list: HalfDart[] = [];
+  private halfkite_list: HalfKite[] = [];
+
   constructor(pointA: Point, pointB: Point, pointC: Point) {
     this.pointA = pointA;
     this.pointB = pointB;
@@ -30,18 +33,8 @@ class HalfDart implements Triangle {
       radCAD = -radCAD;
     }
 
-    this.pointD.x = pointA.x + (vecAC_x * Math.cos(radCAD) - vecAC_y * Math.sin(radCAD));
-    this.pointD.y = pointA.y + (-vecAC_x * Math.sin(radCAD) - vecAC_y * Math.cos(radCAD));
-  }
-
-  public YieldHalfDartList(): HalfDart[] {
-    let hd1 = new HalfDart(this.pointB, this.pointC, this.pointD);
-    return [hd1];
-  }
-
-  public YieldHalfKiteList(): HalfKite[] {
-    let hk1 = new HalfKite(this.pointA, this.pointC, this.pointD);
-    return [hk1];
+    this.pointD.x = pointA.x + (vecAC_x * Math.cos(radCAD) + vecAC_y * Math.sin(radCAD));
+    this.pointD.y = pointA.y + (-vecAC_x * Math.sin(radCAD) + vecAC_y * Math.cos(radCAD));
   }
 };
 export = HalfDart;

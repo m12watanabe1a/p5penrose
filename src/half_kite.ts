@@ -56,17 +56,5 @@ class HalfKite implements Triangle {
     this.pointF.x = pointA.x + (vecAE_x * Math.cos(radEAF) + vecAE_y * Math.sin(radEAF));
     this.pointF.y = pointA.y + (-vecAE_x * Math.sin(radEAF) + vecAE_y * Math.cos(radEAF));
   }
-
-  public YieldHalfDartList(): HalfDart[] {
-    let hd1 = new HalfDart(this.pointA, this.pointD, this.pointE);
-    let hd2 = new HalfDart(this.pointA, this.pointD, this.pointF);
-    return [hd1, hd2];
-  }
-
-  public YieldHalfKiteList(): HalfKite[] {
-    let hk1 = new HalfKite(this.pointC, this.pointD, this.pointB);
-    let hk2 = new HalfKite(this.pointC, this.pointD, this.pointE);
-    return [hk1, hk2];
-  }
 };
 export = HalfKite;
