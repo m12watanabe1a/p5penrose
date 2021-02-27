@@ -1,4 +1,12 @@
+import HalfDart from "./half_dart";
+import HalfKite from "./half_kite";
+import Point from "./point"
 interface Triangle {
-  hello(): string;
+  pointA: Point;
+  pointB: Point;
+  pointC: Point;
+  YieldHalfKiteList(): HalfKite[];
+  YieldHalfDartList(): HalfDart[];
 };
+
 export = Triangle;

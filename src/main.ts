@@ -1,8 +1,14 @@
 import p5 from "p5"
 import HalfKite from "./half_kite"
+import HalfDart from "./half_dart"
 
 const sketch = (p: p5) => {
-  var hk = new HalfKite();
+  var hk_list:HalfKite[] = [];
+  var hd_list:HalfDart[] = [];
+
+  const initHalfKite = () => {
+    
+  }
 
   p.setup = () => {
     p.createCanvas(p.windowWidth, p.windowHeight);
