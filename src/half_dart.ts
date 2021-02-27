@@ -1,5 +1,4 @@
 import Triangle from "./triangle"
-import HalfKite from "./half_kite"
 import Point from "./point"
 
 const rad36degree = 0.6283185307179586;
@@ -11,9 +10,6 @@ class HalfDart implements Triangle {
   public pointD: Point = { x: 0, y: 0 };
 
   public isMirror: boolean = false;
-
-  private halfdart_list: HalfDart[] = [];
-  private halfkite_list: HalfKite[] = [];
 
   constructor(pointA: Point, pointB: Point, pointC: Point) {
     this.pointA = pointA;

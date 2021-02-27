@@ -1,5 +1,4 @@
 import Triangle from "./triangle"
-import HalfDart from "./half_dart"
 import Point from "./point"
 
 const rad72degree = 1.2566370614359172;
