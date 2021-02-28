@@ -82,6 +82,7 @@ const sketch = (p: p5) => {
   const yieldNewDartFromKite = (kite: HalfKite): HalfDart[] => {
     let tmp: HalfDart[] = [];
     tmp.push(new HalfDart(kite.pointA, kite.pointD, kite.pointE));
+    tmp.push(new HalfDart(kite.pointA, kite.pointF, kite.pointE));
     return tmp;
 
   }
@@ -113,7 +114,7 @@ const sketch = (p: p5) => {
 
     kite_list = [];
     dart_list = [];
-    let l = Math.min(p.width, p.height) * 0.8;
+    let l = Math.min(p.width, p.height) * 0.4;
     initDart(l);
   };
 

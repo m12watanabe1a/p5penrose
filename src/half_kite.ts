@@ -32,7 +32,7 @@ class HalfKite implements Triangle {
     // CW is Positive
     let radBCD = rad36degree;
     let radBCE = rad72degree;
-    let radEAF = rad72degree;
+    let radEAF = -rad72degree;
 
     if (this.isMirror) {
       radBCD = -radBCD;
@@ -49,11 +49,11 @@ class HalfKite implements Triangle {
     this.pointE.x = pointC.x + (vecCB_x * Math.cos(radBCE) + vecCB_y * Math.sin(radBCE));
     this.pointE.y = pointC.y + (-vecCB_x * Math.sin(radBCE) + vecCB_y * Math.cos(radBCE));
 
-    let vecAE_x: number = this.pointE.x - this.pointA.x;
-    let vecAE_y: number = this.pointE.y - this.pointA.y;
+    let vecAD_x: number = this.pointD.x - this.pointA.x;
+    let vecAD_y: number = this.pointD.y - this.pointA.y;
 
-    this.pointF.x = pointA.x + (vecAE_x * Math.cos(radEAF) + vecAE_y * Math.sin(radEAF));
-    this.pointF.y = pointA.y + (-vecAE_x * Math.sin(radEAF) + vecAE_y * Math.cos(radEAF));
+    this.pointF.x = pointA.x + (vecAD_x * Math.cos(radEAF) + vecAD_y * Math.sin(radEAF));
+    this.pointF.y = pointA.y + (-vecAD_x * Math.sin(radEAF) + vecAD_y * Math.cos(radEAF));
   }
 };
 export = HalfKite;
