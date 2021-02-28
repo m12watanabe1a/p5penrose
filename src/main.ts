@@ -10,10 +10,15 @@ const sketch = (p: p5) => {
   var new_dart_list: HalfDart[] = [];
   let canvas;
 
-  const KITE_COLOR1 = p.color("#071a52");
-  const KITE_COLOR2 = p.color("#086972");
-  const DART_COLOR1 = p.color("#17b978");
-  const DART_COLOR2 = p.color("#a7ff83");
+  // const KITE_COLOR1 = p.color("#071a52");
+  // const KITE_COLOR2 = p.color("#086972");
+  // const DART_COLOR1 = p.color("#17b978");
+  // const DART_COLOR2 = p.color("#a7ff83");
+
+  const KITE_COLOR1 = p.color("#ec610a");
+  const KITE_COLOR2 = p.color("#ffc300");
+  const DART_COLOR1 = p.color("#6b0848");
+  const DART_COLOR2 = p.color("#a40a3c");
 
   const drawHalfKite = (kite: HalfKite) => {
     p.fill(kite.isMirror ? KITE_COLOR1 : KITE_COLOR2);
@@ -97,6 +102,7 @@ const sketch = (p: p5) => {
   const yieldNewDartFromDart = (dart: HalfDart): HalfDart[] => {
     let tmp: HalfDart[] = [];
     tmp.push(new HalfDart(dart.pointB, dart.pointC, dart.pointD));
+    tmp.push(new HalfDart(dart.pointB, dart.pointE, dart.pointD));
     return tmp;
   }
 
@@ -110,11 +116,12 @@ const sketch = (p: p5) => {
     canvas = p.createCanvas(p.windowHeight, p.windowHeight);
     p.angleMode(p.DEGREES);
     p.background("#131821");
+    p.noStroke();
     p.frameRate(1);
 
     kite_list = [];
     dart_list = [];
-    let l = Math.min(p.width, p.height) * 0.4;
+    let l = Math.min(p.width, p.height) * 0.3;
     initDart(l);
   };
 
@@ -153,8 +160,8 @@ const sketch = (p: p5) => {
       })
     }
 
-    if (loop_num > 7) p.noLoop();
-    // p.saveCanvas(canvas, 'img'+loop_num, 'jpg');
+    if (loop_num > 6) p.noLoop();
+    // p.saveCanvas(canvas, 'img'+loop_num, 'png');
 
     kite_list = new_kite_list;
     dart_list = new_dart_list;
