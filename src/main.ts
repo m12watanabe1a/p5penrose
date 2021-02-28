@@ -31,6 +31,7 @@ const sketch = (p: p5) => {
       kite.pointB.x, kite.pointB.y,
       kite.pointC.x, kite.pointC.y
     );
+    p.fill(kite.isMirror ? KITE_COLOR2 : KITE_COLOR1);
     p.triangle(
       kite.pointA.x, -kite.pointA.y,
       kite.pointB.x, -kite.pointB.y,
@@ -54,6 +55,7 @@ const sketch = (p: p5) => {
       dart.pointB.x, dart.pointB.y,
       dart.pointC.x, dart.pointC.y
     );
+    p.fill(dart.isMirror ? DART_COLOR2 : DART_COLOR1);
     p.triangle(
       dart.pointA.x, -dart.pointA.y,
       dart.pointB.x, -dart.pointB.y,
